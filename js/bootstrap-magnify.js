@@ -7,7 +7,11 @@
      * =============================== */
 
     var Magnify = function (element, options) {
-        this.init('magnify', element, options)
+        if ((typeof options.terminate !== 'undefined') && (options.terminate==true)) {
+            this.terminate(element)
+        }else{
+            this.init('magnify', element, options)
+        }
     }
 
     Magnify.prototype = {
@@ -87,6 +91,11 @@
             }
 
         }
+        , terminate: function (element) {
+            this.$element = $(element)
+            this.$element.unwrap();
+            $( ".magnify-large" ).remove();
+        }    
     }
 
 
